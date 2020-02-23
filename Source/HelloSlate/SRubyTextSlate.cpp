@@ -18,7 +18,7 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FString* Ruby, FT
 {
 
 
-	UDataTable* RubyFont = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), NULL, TEXT("/Game/RubyTextFont")));
+	RubyFont = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), NULL, TEXT("/Game/RubyTextFont")));
 
 	if (RubyFont)
 	{
@@ -35,8 +35,9 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FString* Ruby, FT
 		[
 			SNew(SVerticalBox)
 			+ SVerticalBox::Slot()
-		.VAlign(VAlign_Top)
+		.VAlign(VAlign_Bottom)
 		.HAlign(HAlign_Center)
+		.Padding(0,0,0,0)
 		[
 			// Inside lies a text block with these settings
 			SNew(STextBlock)
@@ -44,7 +45,9 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FString* Ruby, FT
 			//.Font(FSlateFontInfo("/Game/Font/Cafe24Ohsquare_Font.Cafe24Ohsquare_Font",16))
 			.Font(RubyRontRow->font)
 			// localized text to be translated with a generic name HelloSlateText
-			.Text(LOCTEXT("HelloSlateText", "123456"))
+			.Text(FText::FromString(*Ruby))
+			//.Text(LOCTEXT("HelloSlateText", "123456"))
+			.ColorAndOpacity(RubyRontRow->color)
 		]
 		+ SVerticalBox::Slot()
 		.VAlign(VAlign_Bottom)
@@ -55,7 +58,9 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FString* Ruby, FT
 			//.ColorAndOpacity(FLinearColor::Red)
 			.Font(BodyRontRow->font)
 			// localized text to be translated with a generic name HelloSlateText
-			.Text(LOCTEXT("HelloSlateText", "123456789"))
+			.Text(Body)
+			//.Text(LOCTEXT("HelloSlateText", "123456789"))
+			.ColorAndOpacity(BodyRontRow->color)
 		]
 		];
 }

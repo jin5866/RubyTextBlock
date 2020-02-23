@@ -15,6 +15,9 @@ struct FRubyFontTableRow : public FTableRowBase
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "font")
 	FSlateFontInfo font;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "font")
+	FSlateColor color;
 };
 
 
