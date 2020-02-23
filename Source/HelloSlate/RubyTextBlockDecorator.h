@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/RichTextBlockDecorator.h"
+#include "Engine/DataTable.h"
 #include "RubyTextBlockDecorator.generated.h"
 
 /**
@@ -17,4 +18,7 @@ public:
 	URubyTextBlockDecorator(const FObjectInitializer& ObjectInitializer);
 
 	virtual TSharedPtr<ITextDecorator> CreateDecorator(URichTextBlock* InOwner) override;
+
+	UPROPERTY(EditAnywhere, Category = Appearance, meta = (RowType = "RubyFontTableRow"))
+	class UDataTable* RubyFontSet;
 };

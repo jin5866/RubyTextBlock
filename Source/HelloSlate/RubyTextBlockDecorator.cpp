@@ -23,7 +23,7 @@ public:
 	}
 	virtual TSharedPtr<SWidget> CreateDecoratorWidget(const FTextRunInfo& RunInfo, const FTextBlockStyle& TextStyle) const override
 	{
-		return SNew(SRubyTextSlate, RunInfo.MetaData.Find(TEXT("text")), RunInfo.Content);
+		return SNew(SRubyTextSlate, RunInfo.MetaData.Find(TEXT("text")), RunInfo.Content,Decorator->RubyFontSet);
 	}
 
 private:
