@@ -43,7 +43,7 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FString* Ruby, FT
 			+ SVerticalBox::Slot()
 			.VAlign(VAlign_Bottom)
 			.HAlign(HAlign_Center)
-			.Padding(0,0,0,0)
+			.Padding(0,-15,0,-5)
 			[
 			// Inside lies a text block with these settings
 				SNew(STextBlock)
