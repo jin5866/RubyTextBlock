@@ -52,7 +52,7 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FText Ruby, const
 			+ SVerticalBox::Slot()
 			.VAlign(VAlign_Bottom)
 			.HAlign(HAlign_Center)
-			.Padding(RubyFont.textPadding)
+			.Padding(BodyFont.textPadding)
 			[
 				// body text block
 				SNew(STextBlock)
