@@ -27,6 +27,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "font")
 	FLinearColor shadowColor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "font")
+	FMargin textPadding = FMargin(0, 0, 0, 0);
 };
 
 

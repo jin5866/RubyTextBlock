@@ -20,8 +20,8 @@ public:
 
 	virtual TSharedPtr<ITextDecorator> CreateDecorator(URichTextBlock* InOwner) override;
 
-	UPROPERTY(EditAnywhere, Category = Appearance, meta = (RowType = "RubyFontTableRow"))
-	class UDataTable* RubyFontSet;
+	//UPROPERTY(EditAnywhere, Category = Appearance, meta = (RowType = "RubyFontTableRow"))
+	//class UDataTable* RubyFontSet;
 
 	UPROPERTY(EditAnywhere, Category = Appearance)
 	FRubyTextFontData RubyFont;
