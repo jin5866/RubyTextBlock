@@ -8,7 +8,7 @@
 #include "CustomDataTables.generated.h"
 
 USTRUCT(BlueprintType)
-struct FRubyFontTableRow : public FTableRowBase
+struct FRubyTextFontData : public FTableRowBase
 {
 	GENERATED_BODY()
 
@@ -18,6 +18,15 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "font")
 	FSlateColor color;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "font")
+	FSlateBrush brush;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "font")
+	FVector2D shadowOffset;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "font")
+	FLinearColor shadowColor;
 };
 
 

@@ -14,9 +14,9 @@ BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
 #define LOCTEXT_NAMESPACE "SRubyTextSlate"
 
-void SRubyTextSlate::Construct(const FArguments& InArgs, const FString* Ruby, FText Body, class UDataTable* RubyFontT)
+void SRubyTextSlate::Construct(const FArguments& InArgs, const FText Ruby, const FText Body, FRubyTextFontData RubyFont, FRubyTextFontData BodyFont)
 {
-	
+	/*
 	if (RubyFontT) 
 	{
 		RubyFont = RubyFontT;
@@ -24,16 +24,10 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FString* Ruby, FT
 	else
 	{
 		RubyFont = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), NULL, TEXT("/Game/RubyTextFont")));
-	}
+	}*/
 
-	if (RubyFont)
-	{
-		UE_LOG(LogTemp, Log, TEXT("success"))
-	}
-
-	FRubyFontTableRow* RubyRontRow = RubyFont->FindRow<FRubyFontTableRow>(FName("Ruby"), FString(""));
-	FRubyFontTableRow* BodyRontRow = RubyFont->FindRow<FRubyFontTableRow>(FName("Body"), FString(""));
-
+	//FRubyTextFontData* RubyFontRow = RubyFont;
+	//FRubyTextFontData * BodyFontRow = BodyFont;
 
 	ChildSlot
 		.VAlign(VAlign_Top)
@@ -45,28 +39,28 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FString* Ruby, FT
 			.HAlign(HAlign_Center)
 			.Padding(0,-15,0,-5)
 			[
-			// Inside lies a text block with these settings
+				// Ruby Text Block
 				SNew(STextBlock)
-				//.ColorAndOpacity(FLinearColor::Red)
-				//.Font(FSlateFontInfo("/Game/Font/Cafe24Ohsquare_Font.Cafe24Ohsquare_Font",16))
-				.Font(RubyRontRow->font)
-				// localized text to be translated with a generic name HelloSlateText
-				.Text(FText::FromString(*Ruby))
-				//.Text(LOCTEXT("HelloSlateText", "123456"))
-				.ColorAndOpacity(RubyRontRow->color)
+				.Font(RubyFont.font)
+				.Text(Ruby)
+				.ColorAndOpacity(RubyFont.color)
+				.ShadowColorAndOpacity(RubyFont.shadowColor)
+				.ShadowOffset(RubyFont.shadowOffset)
+				//.StrikeBrush(&(RubyFont.brush))
+				
 			]
 			+ SVerticalBox::Slot()
 			.VAlign(VAlign_Bottom)
 			.HAlign(HAlign_Center)
 			[
-				// Inside lies a text block with these settings
+				// body text block
 				SNew(STextBlock)
-				//.ColorAndOpacity(FLinearColor::Red)
-				.Font(BodyRontRow->font)
-				// localized text to be translated with a generic name HelloSlateText
+				.Font(BodyFont.font)
 				.Text(Body)
-				//.Text(LOCTEXT("HelloSlateText", "123456789"))
-				.ColorAndOpacity(BodyRontRow->color)
+				.ColorAndOpacity(BodyFont.color)
+				.ShadowColorAndOpacity(BodyFont.shadowColor)
+				.ShadowOffset(BodyFont.shadowOffset)
+				//.StrikeBrush(&(BodyFont.brush))
 			]
 		];
 }

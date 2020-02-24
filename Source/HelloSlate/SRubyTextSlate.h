@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Widgets/SCompoundWidget.h"
-
+#include "CustomDataTables.h"
 #include "Slate.h"
 /**
  * 
@@ -17,7 +17,7 @@ public:
 	SLATE_END_ARGS()
 
 	/** Constructs this widget with InArgs */
-	void Construct(const FArguments& InArgs,const FString* Ruby,FText Body, class UDataTable* RubyFontT);
+	void Construct(const FArguments& InArgs,const FText Ruby,const FText Body, FRubyTextFontData RubyFont, FRubyTextFontData BodyFont);
 private:
 	class UDataTable* RubyFont;
 };

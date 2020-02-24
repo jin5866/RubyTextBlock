@@ -7,5 +7,5 @@
 
 AHelloSlateGameModeBase::AHelloSlateGameModeBase() : Super()
 {
-	HUDClass = AStandardHUD::StaticClass();
+	//HUDClass = AStandardHUD::StaticClass();
 }

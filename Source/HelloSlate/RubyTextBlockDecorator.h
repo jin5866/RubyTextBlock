@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/RichTextBlockDecorator.h"
 #include "Engine/DataTable.h"
+#include "CustomDataTables.h"
 #include "RubyTextBlockDecorator.generated.h"
 
 /**
@@ -21,4 +22,10 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Appearance, meta = (RowType = "RubyFontTableRow"))
 	class UDataTable* RubyFontSet;
+
+	UPROPERTY(EditAnywhere, Category = Appearance)
+	FRubyTextFontData RubyFont;
+
+	UPROPERTY(EditAnywhere, Category = Appearance)
+	FRubyTextFontData BodyFont;
 };

@@ -21,7 +21,7 @@ void SStandardSlateWidget::Construct(const FArguments& InArgs)
 	if (DataTable.Succeeded())
 	{
 		
-	}*/
+	}
 	// font from datatable
 	UDataTable* RubyFont = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), NULL, TEXT("/Game/RubyTextFont")));
 
@@ -30,7 +30,7 @@ void SStandardSlateWidget::Construct(const FArguments& InArgs)
 		UE_LOG(LogTemp, Log, TEXT("success"))
 	}
 	
-	FRubyFontTableRow* fontRow = RubyFont->FindRow<FRubyFontTableRow>(FName("Ruby"),FString(""));
+	FRubyTextFontData* fontRow = RubyFont->FindRow<FRubyTextFontData>(FName("Ruby"),FString(""));
 
 	ChildSlot
 	.VAlign(VAlign_Top)
@@ -64,7 +64,7 @@ void SStandardSlateWidget::Construct(const FArguments& InArgs)
 			// localized text to be translated with a generic name HelloSlateText
 			.Text(LOCTEXT("HelloSlateText", "123456789"))
 		]
-	];
+	];*/
 	
 }
 
