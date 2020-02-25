@@ -32,7 +32,8 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FTextRunInfo& Run
 	
 
 
-
+	FMargin rubyPadding = RubyFontInfo.textPadding;
+	FMargin bodyPadding = BodyFontInfo.textPadding;
 
 	FSlateFontInfo rubyFont = RubyFontInfo.font;
 	FSlateFontInfo bodyFont = BodyFontInfo.font;
@@ -40,6 +41,7 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FTextRunInfo& Run
 	FSlateColor rubyColor = RubyFontInfo.color;
 	FSlateColor bodyColor = BodyFontInfo.color;
 
+	//font style
 
 	if (const FString* rubystyle = RunInfo.MetaData.Find(TEXT("ruby_style")))
 	{
@@ -51,6 +53,8 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FTextRunInfo& Run
 		bodyFont.TypefaceFontName = FName(**bodystyle);
 	}
 
+	//color
+
 	if (const FString * rubycolor = RunInfo.MetaData.Find(TEXT("ruby_color")))
 	{
 		rubyColor = FSlateColor(FColor::FromHex(*rubycolor));
@@ -59,6 +63,60 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FTextRunInfo& Run
 	if (const FString * bodycolor = RunInfo.MetaData.Find(TEXT("body_color")))
 	{
 		bodyColor = FSlateColor(FColor::FromHex(*bodycolor));
+	}
+
+	//size
+
+	if (const FString * rubysize = RunInfo.MetaData.Find(TEXT("ruby_size")))
+	{
+		rubyFont.Size = FCString::Atoi(**rubysize);
+	}
+
+	if (const FString * bodysize = RunInfo.MetaData.Find(TEXT("body_size")))
+	{
+		bodyFont.Size = FCString::Atoi(**bodysize);
+	}
+
+	// padding
+
+	if (const FString * rubytop = RunInfo.MetaData.Find(TEXT("ruby_top")))
+	{
+		rubyPadding.Top = FCString::Atof(**rubytop);
+	}
+
+	if (const FString * rubybottom = RunInfo.MetaData.Find(TEXT("ruby_bottom")))
+	{
+		rubyPadding.Bottom = FCString::Atof(**rubybottom);
+	}
+
+	if (const FString * rubyright = RunInfo.MetaData.Find(TEXT("ruby_right")))
+	{
+		rubyPadding.Right = FCString::Atof(**rubyright);
+	}
+
+	if (const FString * rubyleft = RunInfo.MetaData.Find(TEXT("ruby_left")))
+	{
+		rubyPadding.Left = FCString::Atof(**rubyleft);
+	}
+
+	if (const FString * bodytop = RunInfo.MetaData.Find(TEXT("body_top")))
+	{
+		bodyPadding.Top = FCString::Atof(**bodytop);
+	}
+
+	if (const FString * bodybottom = RunInfo.MetaData.Find(TEXT("body_bottom")))
+	{
+		bodyPadding.Bottom = FCString::Atof(**bodybottom);
+	}
+
+	if (const FString * bodyright = RunInfo.MetaData.Find(TEXT("body_right")))
+	{
+		bodyPadding.Right = FCString::Atof(**bodyright);
+	}
+
+	if (const FString * bodyleft = RunInfo.MetaData.Find(TEXT("body_left")))
+	{
+		bodyPadding.Left = FCString::Atof(**bodyleft);
 	}
 
 	//FLinearColor rubyShadowColor = RubyFontInfo.shadowColor;
@@ -78,7 +136,7 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FTextRunInfo& Run
 			+ SVerticalBox::Slot()
 			.VAlign(VAlign_Bottom)
 			.HAlign(HAlign_Center)
-			.Padding(RubyFontInfo.textPadding)
+			.Padding(rubyPadding)
 			[
 				// Ruby Text Block
 				SNew(STextBlock)
@@ -94,7 +152,7 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FTextRunInfo& Run
 			+ SVerticalBox::Slot()
 			.VAlign(VAlign_Bottom)
 			.HAlign(HAlign_Center)
-			.Padding(BodyFontInfo.textPadding)
+			.Padding(bodyPadding)
 			[
 				// body text block
 				SNew(STextBlock)
