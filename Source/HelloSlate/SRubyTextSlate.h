@@ -17,7 +17,7 @@ public:
 	SLATE_END_ARGS()
 
 	/** Constructs this widget with InArgs */
-	void Construct(const FArguments& InArgs,const FText Ruby,const FText Body, FRubyTextFontData RubyFont, FRubyTextFontData BodyFont);
+	void Construct(const FArguments& InArgs, const FTextRunInfo& RunInfo,const FText Ruby,const FText Body, FRubyTextFontData RubyFont, FRubyTextFontData BodyFont);
 private:
 	class UDataTable* RubyFont;
 };
