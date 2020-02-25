@@ -7,6 +7,7 @@
 #include "CustomDataTables.h"
 #include "UObject/ConstructorHelpers.h"
 
+#include "Kismet/KismetStringLibrary.h"
 #include "Runtime/Engine/Classes/Engine/Engine.h" 
 
 
@@ -41,6 +42,12 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FTextRunInfo& Run
 	FSlateColor rubyColor = RubyFontInfo.color;
 	FSlateColor bodyColor = BodyFontInfo.color;
 
+	FLinearColor rubyShadowColor = RubyFontInfo.shadowColor;
+	FLinearColor bodyShadowColor = BodyFontInfo.shadowColor;
+
+	FVector2D rubyShadowOffset = RubyFontInfo.shadowOffset;
+	FVector2D bodyShadowOffset = BodyFontInfo.shadowOffset;
+
 	//font style
 
 	if (const FString* rubystyle = RunInfo.MetaData.Find(TEXT("ruby_style")))
@@ -54,6 +61,7 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FTextRunInfo& Run
 	}
 
 	//color
+	//Supported formats are: RGB, RRGGBB, RRGGBBAA, RGB, #RRGGBB, #RRGGBBAA
 
 	if (const FString * rubycolor = RunInfo.MetaData.Find(TEXT("ruby_color")))
 	{
@@ -119,11 +127,51 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FTextRunInfo& Run
 		bodyPadding.Left = FCString::Atof(**bodyleft);
 	}
 
+	//shadow color
+
+	if (const FString * shadowcolor = RunInfo.MetaData.Find(TEXT("ruby_shadow_color")))
+	{
+		rubyShadowColor = FLinearColor(FColor::FromHex(*shadowcolor));
+	}
+
+	if (const FString * shadowcolor = RunInfo.MetaData.Find(TEXT("body_shadow_color")))
+	{
+		bodyShadowColor = FLinearColor(FColor::FromHex(*shadowcolor));
+	}
+
+	//shadow offset
+	// formats "{x=10 y=10}"
+
+	if (const FString * shadowoffset = RunInfo.MetaData.Find(TEXT("ruby_shadow_offset")))
+	{
+		FVector2D vec;
+		bool isValid;
+		UKismetStringLibrary::Conv_StringToVector2D(*shadowoffset,vec,isValid);
+
+		if (isValid) 
+		{
+			rubyShadowOffset = vec;
+		}
+	}
+
+	if (const FString * shadowoffset = RunInfo.MetaData.Find(TEXT("body_shadow_offset")))
+	{
+		FVector2D vec;
+		bool isValid;
+		UKismetStringLibrary::Conv_StringToVector2D(*shadowoffset, vec, isValid);
+
+		if (isValid)
+		{
+			bodyShadowOffset = vec;
+		}
+	}
+
+	//
+
 	//FLinearColor rubyShadowColor = RubyFontInfo.shadowColor;
 	//FLinearColor bodyShadowColor = BodyFontInfo.shadowColor;
 
-	//Supported formats are: RGB, RRGGBB, RRGGBBAA, RGB, #RRGGBB, #RRGGBBAA
-	FSlateColor a = FSlateColor(FColor::FromHex("#aaaaaa"));
+
 
 	//FVector2D 
 
@@ -144,8 +192,8 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FTextRunInfo& Run
 				.Font(rubyFont)
 				.Text(RubyText)
 				.ColorAndOpacity(rubyColor)
-				.ShadowColorAndOpacity(RubyFontInfo.shadowColor)
-				.ShadowOffset(RubyFontInfo.shadowOffset)
+				.ShadowColorAndOpacity(rubyShadowColor)
+				.ShadowOffset(rubyShadowOffset)
 				//.StrikeBrush(&(RubyFont.brush))
 				
 			]
@@ -159,8 +207,8 @@ void SRubyTextSlate::Construct(const FArguments& InArgs, const FTextRunInfo& Run
 				.Font(bodyFont)
 				.Text(BodyText)
 				.ColorAndOpacity(bodyColor)
-				.ShadowColorAndOpacity(BodyFontInfo.shadowColor)
-				.ShadowOffset(BodyFontInfo.shadowOffset)
+				.ShadowColorAndOpacity(bodyShadowColor)
+				.ShadowOffset(bodyShadowOffset)
 				//.StrikeBrush(&(BodyFont.brush))
 			]
 		];
